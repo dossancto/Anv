@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anv", "Anv\Anv.csproj", "{3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anv.Tests", "Anv.Tests\Anv.Tests.csproj", "{54F4B68F-34FD-43A1-94FB-BC8F33C6B421}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anv.Tool", "Anv.Tool\Anv.Tool.csproj", "{6C152468-1D53-4C8C-B93E-8A4C9511FAD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{54F4B68F-34FD-43A1-94FB-BC8F33C6B421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F4B68F-34FD-43A1-94FB-BC8F33C6B421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F4B68F-34FD-43A1-94FB-BC8F33C6B421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C152468-1D53-4C8C-B93E-8A4C9511FAD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C152468-1D53-4C8C-B93E-8A4C9511FAD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C152468-1D53-4C8C-B93E-8A4C9511FAD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C152468-1D53-4C8C-B93E-8A4C9511FAD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
