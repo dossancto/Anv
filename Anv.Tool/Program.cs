@@ -76,6 +76,12 @@ app.AddCommand("generate", (string output, string envFile = ".env.example") =>
     foreach (var line in lines)
     {
         var cleanLine = line.Trim().Split("=").First();
+
+        if (cleanLine.StartsWith("#"))
+        {
+            continue;
+        }
+
         var tokens = cleanLine.Split(".");
 
         ParseTokens(tree, tokens);

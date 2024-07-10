@@ -54,6 +54,12 @@ public class SourceGeneration
         foreach (var line in lines)
         {
             var cleanLine = line.Trim().Split("=").First();
+
+            if (cleanLine.StartsWith("#"))
+            {
+                continue;
+            }
+
             var tokens = cleanLine.Split(".");
 
             ParseTokens(tree, tokens);
