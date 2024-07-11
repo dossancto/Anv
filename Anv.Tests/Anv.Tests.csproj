@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Anv\Anv.csproj" />
+    <ProjectReference Include="..\Anv.Tool\Anv.Tool.csproj" />
   </ItemGroup>
 
 </Project>
