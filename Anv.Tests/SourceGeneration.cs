@@ -104,19 +104,19 @@ public class SourceGeneration
 
         Assert.Equal("TROPA", n[0].Nodes[0].Name);
         Assert.True(n[0].Nodes[0].IsEnv);
-        Assert.Equal("SALVE.TROPA", n[0].Nodes[0].FullName);
+        Assert.Equal("SALVE__TROPA", n[0].Nodes[0].FullName);
 
         Assert.Equal("MEU_REI", n[0].Nodes[1].Name);
         Assert.False(n[0].Nodes[1].IsEnv);
-        Assert.Equal("SALVE.MEU_REI", n[0].Nodes[1].FullName);
+        Assert.Equal("SALVE__MEU_REI", n[0].Nodes[1].FullName);
 
         Assert.Equal("SOMETHING", n[0].Nodes[1].Nodes[0].Name);
         Assert.True(n[0].Nodes[1].Nodes[0].IsEnv);
-        Assert.Equal("SALVE.MEU_REI.SOMETHING", n[0].Nodes[1].Nodes[0].FullName);
+        Assert.Equal("SALVE__MEU_REI__SOMETHING", n[0].Nodes[1].Nodes[0].FullName);
 
         Assert.Equal("DAS_NEVES", n[0].Nodes[1].Nodes[1].Name);
         Assert.True(n[0].Nodes[1].Nodes[1].IsEnv);
-        Assert.Equal("SALVE.MEU_REI.DAS_NEVES", n[0].Nodes[1].Nodes[1].FullName);
+        Assert.Equal("SALVE__MEU_REI__DAS_NEVES", n[0].Nodes[1].Nodes[1].FullName);
 
         Assert.Equal("AWS_PROFILE", n[1].Name);
         Assert.True(n[1].IsEnv);

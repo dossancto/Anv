@@ -25,7 +25,7 @@ public static class Generation
 
             var tokens = cleanLine.Split(doubleQuoteSeparator ? "__" : ".");
 
-            ParseTokens(tree, tokens);
+            ParseTokens(tree, tokens, doubleQuoteSeparator);
 
         }
 
@@ -33,7 +33,7 @@ public static class Generation
     }
 
 
-    public static void ParseTokens(AnvTree fatherNode, string[] lines, int depth = 0)
+    public static void ParseTokens(AnvTree fatherNode, string[] lines, bool useUnderlineSeparator = false, int depth = 0)
     {
         var token = lines.ElementAtOrDefault(depth);
 
@@ -46,7 +46,7 @@ public static class Generation
 
         if (node is not null)
         {
-            ParseTokens(node, lines, depth + 1);
+            ParseTokens(node, lines, useUnderlineSeparator, depth + 1);
 
             return;
         }
@@ -54,12 +54,12 @@ public static class Generation
         fatherNode.Nodes.Add(new AnvTree
         {
             Name = token,
-            FullName = string.Join(".", lines.Take(depth + 1))
+            FullName = string.Join(useUnderlineSeparator ? "__" : ".", lines.Take(depth + 1))
         });
 
         var recentlyAdded = fatherNode.Nodes.Last();
 
-        ParseTokens(recentlyAdded, lines, depth + 1);
+        ParseTokens(recentlyAdded, lines, useUnderlineSeparator, depth + 1);
 
         return;
     }
