@@ -26,7 +26,6 @@ public static class Generation
             var tokens = cleanLine.Split(doubleQuoteSeparator ? "__" : ".");
 
             ParseTokens(tree, tokens, doubleQuoteSeparator);
-
         }
 
         return tree;
