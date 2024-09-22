@@ -6,11 +6,11 @@ using static Anv.Tool.Generation;
 var app = CoconaApp.Create();
 
 
-app.AddCommand("generate", (string output, string envFile = ".env.example", bool doubleQuoteSeparator = true) =>
+app.AddCommand("generate", (string output, string envFile = ".env.example", bool doubleQuoteSeparator) =>
 {
     var env = File.ReadAllText(envFile);
 
-    var tree = GenerateTree(env, doubleQuoteSeparator);
+    var tree = GenerateTree(env, !doubleQuoteSeparator);
 
     var sb = new StringBuilder();
 
