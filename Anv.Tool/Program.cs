@@ -6,7 +6,7 @@ using static Anv.Tool.Generation;
 var app = CoconaApp.Create();
 
 
-app.AddCommand("generate", (string output, string envFile = ".env.example", bool doubleQuoteSeparator) =>
+app.AddCommand("generate", (string output, string envFile = ".env.example", bool doubleQuoteSeparator = false) =>
 {
     var env = File.ReadAllText(envFile);
 

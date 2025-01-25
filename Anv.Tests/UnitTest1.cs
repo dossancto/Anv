@@ -11,7 +11,6 @@ public static class MyEnvs
     public static class NESTED
     {
         public static readonly AnvEnv MY_KEY = new("NESTED_MY_KEY");
-
     }
 }
 
