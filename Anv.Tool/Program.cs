@@ -1,10 +1,8 @@
 using System.Text;
 using Cocona;
-
 using static Anv.Tool.Generation;
 
 var app = CoconaApp.Create();
-
 
 app.AddCommand("generate", (string output, string envFile = ".env.example", bool doubleQuoteSeparator = false) =>
 {
@@ -18,7 +16,7 @@ app.AddCommand("generate", (string output, string envFile = ".env.example", bool
 
     BuildAnvClass(tree, sb);
 
-    var content = sb.ToString();
+    var content = sb.ToString().FormatCSharpCode();
 
     var path = Path.Join(output, "AppEnv.cs");
 
@@ -26,4 +24,3 @@ app.AddCommand("generate", (string output, string envFile = ".env.example", bool
 });
 
 app.Run();
-

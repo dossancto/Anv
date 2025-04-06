@@ -1,10 +1,12 @@
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Formatting;
 
 namespace Anv.Tool;
 
 public static class Generation
 {
-
     public static AnvTree GenerateTree(string env, bool doubleQuoteSeparator = false)
     {
         var tree = new AnvTree()
@@ -31,8 +33,7 @@ public static class Generation
         return tree;
     }
 
-
-    public static void ParseTokens(AnvTree fatherNode, string[] lines, bool useUnderlineSeparator = false, int depth = 0)
+    private static void ParseTokens(AnvTree fatherNode, string[] lines, bool useUnderlineSeparator = false, int depth = 0)
     {
         var token = lines.ElementAtOrDefault(depth);
 
@@ -84,6 +85,19 @@ public static class Generation
         }
 
         sb.AppendLine("}");
+    }
+
+    public static string FormatCSharpCode(this string code)
+    {
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var root = tree.GetRoot();
+
+        var workspace = new AdhocWorkspace();
+        var options = workspace.Options;
+
+        var formattedRoot = Formatter.Format(root, workspace, options);
+
+        return formattedRoot.ToFullString();
     }
 }
 
