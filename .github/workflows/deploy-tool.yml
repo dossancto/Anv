@@ -1,0 +1,25 @@
+name: Deploy Anv.Tool
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Pack
+        run: dotnet pack Anv.Tool -c Release -o out
+
+      - name: Push to nuGet
+        run: dotnet nuget push "./out/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
