@@ -18,22 +18,30 @@ public static class Generation
 
         foreach (var line in lines)
         {
-            var cleanLine = line.Trim().Split("=").First();
+            var l = line.Trim();
 
-            if (cleanLine.StartsWith("#"))
+            if (l.StartsWith("#")) continue;
+
+            var lineTokens = l.Split("=");
+
+            var envName = lineTokens.First();
+
+            var tokens = envName.Split(doubleQuoteSeparator ? "__" : ".");
+
+            string? comment = null;
+
+            if (l.Contains(" #"))
             {
-                continue;
+                comment = l.Split(" #").LastOrDefault()?.TrimStart();
             }
 
-            var tokens = cleanLine.Split(doubleQuoteSeparator ? "__" : ".");
-
-            ParseTokens(tree, tokens, doubleQuoteSeparator);
+            ParseTokens(tree, tokens, comment, doubleQuoteSeparator);
         }
 
         return tree;
     }
 
-    private static void ParseTokens(AnvTree fatherNode, string[] lines, bool useUnderlineSeparator = false, int depth = 0)
+    private static void ParseTokens(AnvTree fatherNode, string[] lines, string? comment, bool useUnderlineSeparator = false, int depth = 0)
     {
         var token = lines.ElementAtOrDefault(depth);
 
@@ -46,7 +54,7 @@ public static class Generation
 
         if (node is not null)
         {
-            ParseTokens(node, lines, useUnderlineSeparator, depth + 1);
+            ParseTokens(node, lines, comment, useUnderlineSeparator, depth + 1);
 
             return;
         }
@@ -54,12 +62,13 @@ public static class Generation
         fatherNode.Nodes.Add(new AnvTree
         {
             Name = token,
+            Comment = comment,
             FullName = string.Join(useUnderlineSeparator ? "__" : ".", lines.Take(depth + 1))
         });
 
         var recentlyAdded = fatherNode.Nodes.Last();
 
-        ParseTokens(recentlyAdded, lines, useUnderlineSeparator, depth + 1);
+        ParseTokens(recentlyAdded, lines, comment, useUnderlineSeparator, depth + 1);
 
         return;
     }
@@ -81,6 +90,12 @@ public static class Generation
                 continue;
             }
 
+            if (n.Comment is not null)
+            {
+                sb.AppendLine($"/// <summary>");
+                sb.AppendLine($"/// {n.Comment}");
+                sb.AppendLine($"/// </summary>");
+            }
             sb.AppendLine($"public static readonly AnvEnv {n.Name} = new(\"{n.FullName}\");");
         }
 
@@ -108,5 +123,6 @@ public record AnvTree
     public bool IsEnv => Nodes.Count == 0 && !string.IsNullOrWhiteSpace(Name);
 
     public string? Name { get; set; }
+    public string? Comment { get; set; }
     public string? FullName { get; set; }
 }

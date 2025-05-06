@@ -43,6 +43,7 @@ public class SourceGeneration
         Assert.Equal("TROPA", n[0].Nodes[0].Name);
         Assert.True(n[0].Nodes[0].IsEnv);
         Assert.Equal("SALVE.TROPA", n[0].Nodes[0].FullName);
+        Assert.Equal("Must contain a description about the field", n[0].Nodes[0].Comment);
 
         Assert.Equal("MEU_REI", n[0].Nodes[1].Name);
         Assert.False(n[0].Nodes[1].IsEnv);
@@ -51,6 +52,8 @@ public class SourceGeneration
         Assert.Equal("SOMETHING", n[0].Nodes[1].Nodes[0].Name);
         Assert.True(n[0].Nodes[1].Nodes[0].IsEnv);
         Assert.Equal("SALVE.MEU_REI.SOMETHING", n[0].Nodes[1].Nodes[0].FullName);
+
+        Assert.Null(n.FirstOrDefault(x => x.Name is "SHOULD_NOT_BE_INCLUDED"));
 
         Assert.Equal("DAS_NEVES", n[0].Nodes[1].Nodes[1].Name);
         Assert.True(n[0].Nodes[1].Nodes[1].IsEnv);
