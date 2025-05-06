@@ -11,7 +11,7 @@ public class SourceGeneration
     {
         Console.WriteLine("test");
 
-        Console.ReadKey();
+        //Console.Read();
 
         var envFile = File.ReadAllText("../../.././env.test.1");
 
@@ -65,7 +65,7 @@ public class SourceGeneration
 
         BuildAnvClass(tree, sb);
 
-        Console.WriteLine(sb.ToString());
+        Console.WriteLine(sb.ToString().FormatCSharpCode());
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class SourceGeneration
     {
         Console.WriteLine("test");
 
-        Console.ReadKey();
+        Console.Read();
 
         var envFile = File.ReadAllText("../../.././env.test.2");
 
@@ -127,7 +127,6 @@ public class SourceGeneration
 
         BuildAnvClass(tree, sb);
 
-        Console.WriteLine(sb.ToString());
+        Console.WriteLine(sb.ToString().FormatCSharpCode());
     }
-
 }
