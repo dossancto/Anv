@@ -53,6 +53,8 @@ public class SourceGeneration
         Assert.True(n[0].Nodes[1].Nodes[0].IsEnv);
         Assert.Equal("SALVE.MEU_REI.SOMETHING", n[0].Nodes[1].Nodes[0].FullName);
 
+        Assert.Null(n.FirstOrDefault(x => x.Name is "SHOULD_NOT_BE_INCLUDED"));
+
         Assert.Equal("DAS_NEVES", n[0].Nodes[1].Nodes[1].Name);
         Assert.True(n[0].Nodes[1].Nodes[1].IsEnv);
         Assert.Equal("SALVE.MEU_REI.DAS_NEVES", n[0].Nodes[1].Nodes[1].FullName);
