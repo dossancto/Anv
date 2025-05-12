@@ -1,6 +1,6 @@
 namespace Anv;
 
-public sealed class AnvEnv
+public readonly record struct AnvEnv
 {
     public AnvEnv(string name, string? val)
     {
@@ -17,8 +17,8 @@ public sealed class AnvEnv
     public static AnvEnv Load(string envName)
       => new(envName);
 
-    public string? Value { get; set; }
-    public string Name { get; set; }
+    public string? Value { get; }
+    public string Name { get; }
 
     public static implicit operator string?(AnvEnv val) => val.Value;
 
